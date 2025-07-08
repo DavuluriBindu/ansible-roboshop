@@ -1,5 +1,5 @@
 - name: catalogue configure 
-  hosts: catalogue 
+  hosts: Catalogue 
   become: yes 
   tasks: 
   - name: disable the nodejs
@@ -69,4 +69,3 @@
   - name: load products
     ansible.builtin.shell: mongosh --host mongodb.devops84.site < /app/db/master-data.js
     when: catalogue.output.stdout | int < 0
-    
