@@ -1,5 +1,5 @@
 - name: cart configure 
-  hosts: cart 
+  hosts: Cart 
   become: yes 
   tasks: 
   - name: disable the nodejs

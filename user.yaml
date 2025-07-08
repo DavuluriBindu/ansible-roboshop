@@ -1,5 +1,5 @@
 - name: user configure 
-  hosts: user 
+  hosts: User 
   become: yes 
   tasks: 
   - name: disable the nodejs
