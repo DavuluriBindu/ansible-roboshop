@@ -34,7 +34,10 @@
     args:
       chdir: /app 
 
-
+  - name: install maven dependencies 
+    ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar  
+    args:
+      chdir: /app 
 
 
   - name: copy shipping service 
@@ -55,7 +58,30 @@
   - name: install mysql 
     ansible.builtin.command: dnf install mysql -y 
 
+  - name: install pymysql and cryptography dependencies 
+    ansible.builtin.pip: 
+      name: "{{ item }}"
+      executable: pip3.9 
+    loop: 
+    - PyMySQL 
+    - Cryptography
 
+
+# we use tags to run particular module 
+# ex: tags:
+#     - import
+  - name: connect to mysql using app user 
+    community.mysql.mysql_db:
+      name: all
+      login_user: root 
+      login_password: RoboShop@1 
+      login_host: mysql.devops84.site 
+      state: import 
+      target: "{{ item }}" 
+      loop: 
+      - /app/db/schema.sql 
+      - /app/db/app-user.sql 
+      - /app/db/master-data.sql  
 
     
 
@@ -63,3 +89,5 @@
     ansible.builtin.service:
       name: shipping 
       state: restarted 
+
+  
