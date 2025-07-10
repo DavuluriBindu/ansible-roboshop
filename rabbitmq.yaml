@@ -16,7 +16,14 @@
       state: started 
       enabled: yes 
   - name: rabbitmq user  setup 
-    ansible.builtin.command: rabbitmqctl add_user roboshop roboshop123 
+    community.rabbitmq.rabbitmq_user: 
+      user: roboshop 
+      password: roboshop123 
+      permissions: 
+        - vhost: / 
+          configure_priv: .* 
+          read_priv: .* 
+          write_priv: .* 
+      state: present 
   
-  - name: rabbitmq password setup 
-    ansible.builtin.command: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+  
