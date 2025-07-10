@@ -32,8 +32,10 @@
   - name: python dependencie installation 
     ansible.builtin.pip:
       name: python 
-      executable: pip3 
-      requirements: /app/requirements.txt
+      executable: pip3.9 
+      requirements: requirements.txt 
+    args:
+      chdir: /app
 
 
   - name: copy payment service 
@@ -51,12 +53,3 @@
       state: started
       enabled: yes 
 
- 
-
-
-    
-
-  - name: restart the payment 
-    ansible.builtin.service:
-      name: payment 
-      state: restarted 
