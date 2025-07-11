@@ -31,7 +31,6 @@
 
   - name: python dependencie installation 
     ansible.builtin.pip:
-      name: python 
       executable: pip3.9 
       requirements: requirements.txt 
     args:
