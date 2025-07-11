@@ -67,9 +67,7 @@
     - Cryptography
 
 
-# we use tags to run particular module 
-# ex: tags:
-#     - import
+
   - name: connect to mysql using app user 
     community.mysql.mysql_db:
       name: all
